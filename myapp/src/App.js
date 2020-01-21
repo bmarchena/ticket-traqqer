@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import Login from './Login.js';
+import SignUp from './SignUp.js';
+import logo from './logo.svg';
 import './App.css';
-import SignUp from './signUp';
 
 class App extends Component {
   constructor(props) {
@@ -9,7 +11,7 @@ class App extends Component {
       //what needs to be done
       job: 'Home Page',
       loggedIn: false,
-      count: null,
+      count: 0,
       items: []
     }
   }
@@ -26,12 +28,28 @@ class App extends Component {
       )
   }
 
-  login = () => {
+  guest = (e) => {
+    console.log(this.state.items[1].summons_image.url)
+    // this.setState({
+    //   job: 'Display Summons Image'
+    // })
+  }
+
+
+  
+
+  userLogin = () => {
     this.setState({
-      job: 'Login Page'
+      job: 'User Login'
     })
   }
 
+  userSignup = () => {
+    this.setState({
+      job: "User Signup"
+    })
+  }
+  
   guest = () => {
     this.setState({
       job: 'Guest Page'
@@ -40,36 +58,46 @@ class App extends Component {
 
   checkSummonsNumberIndex = () => {
     let summonsNumber = document.getElementById('summonsNumber').value
-    if (!this.state.items.summons_number.includes(summonsNumber)) {
-      alert('Invalid Summons Number, please try again.')
+    let validNumber = false
+    for (let i = 0; i < this.state.items.length; i++) {
+      if (this.state.items[i].summons_number == summonsNumber) {
+        validNumber = true
+        break
+      }
     }
-    else {
+    if (validNumber) {
       let index = this.state.items.findIndex(item => item.summons_number === summonsNumber)
       this.setState({
         count: index,
         job: 'Guest Page Search'
       })
     }
+    else {
+      alert('Invalid Summons Number, please try again.')
+    }
   }
 
-  //this.state.items[0].summons_image.url
 
   navBar = () => {
-    if (!this.state.loggedIn) {
+    if (this.state.loggedIn === false) {
       return (
-        <nav className="">
-          <h1>TicketTraqqer</h1>
-          <a href='index.js' onClick={this.login}>Login</a>
-          <a onClick={SignUp}>Signup</a>
+        <nav className="navbar">
+          <h1>Ticket Traqqer</h1>
+          <div className="navbarButtons">
+            <button onClick={this.userLogin}>Log In</button>
+            <button onClick={this.userSignup}>Sign Up</button>
+          </div>
         </nav>
       )
     }
-    else if (this.state.loggedIn) {
+    if (this.state.loggedIn === true) {
       return (
-        <nav className="">
-          <h1>TicketTraqqer</h1>
-          <button onClick={this.homePage}>Home</button>
-          <button onClick={this.login}>Logout</button>
+        <nav className="navbar">
+          <h1>Ticket Traqqer</h1>
+          <div className="navbarButtons">
+            <button onClick={this.homePage}>Home</button>
+            <button onClick={this.login}>Logout</button>
+          </div>
         </nav>
       )
     }
@@ -83,12 +111,17 @@ class App extends Component {
       return (
         <div className="App" >
           {navBar}
-          <h1>Welcome to TicketTraqqer!</h1>
-          <button onClick={this.login}>Log In</button>
-          <h2>or</h2>
+          <h1>Welcome to Ticket Traqqer!</h1>
+          <button onClick={this.userLogin}>Log In</button>
           <button onClick={this.guest}>Continue As Guest</button>
         </div>
       );
+    }
+
+    else if (job === 'Display Summons Image') {
+      return (
+        <img src={items[1].summons_image.url}></img>
+      )
     }
 
     else if (job === 'Guest Page') {
@@ -112,6 +145,22 @@ class App extends Component {
         </div>
       )
     }
+
+    else if (job === 'User Login'){
+      return (
+        <div className="userLogin">
+          {navBar}
+          <Login />
+        </div>
+      )
+    }
+
+    else if (job === "User Signup"){
+      return (
+        <SignUp/>
+      )
+    }
+
   }
 }
 

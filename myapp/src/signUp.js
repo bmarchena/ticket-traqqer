@@ -34,7 +34,7 @@ class SignUp extends Component{
     }
     console.log(this.grabInfo())
   }
-  
+
   render(){
     return(
       <div>
