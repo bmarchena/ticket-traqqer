@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import signUp from './signUp';
 
 class App extends Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class App extends Component {
   }
 
   guest = (e) => {
-    console.log(this.state.items[0].summons_image.url)
+    console.log(this.state.items[1].summons_image.url)
     // this.setState({
     //   job: 'Display Summons Image'
     // })
@@ -39,8 +40,8 @@ class App extends Component {
       return (
         <nav className="">
           <h1>Ticket Traqqer</h1>
-          <button onClick={this.login}>Login</button>
-          <button onClick={this.signup}>Signup</button>
+          <a href='index.js' onClick={this.login}>Login</a>
+          <a onClick={signUp}>Signup</a>
         </nav>
       )
     }
