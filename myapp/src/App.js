@@ -50,6 +50,34 @@ class App extends Component {
     })
   }
   
+  guest = () => {
+    this.setState({
+      job: 'Guest Page'
+    })
+  }
+
+  checkSummonsNumberIndex = () => {
+    let summonsNumber = document.getElementById('summonsNumber').value
+    let validNumber = false
+    for (let i = 0; i < this.state.items.length; i++) {
+      if (this.state.items[i].summons_number == summonsNumber) {
+        validNumber = true
+        break
+      }
+    }
+    if (validNumber) {
+      let index = this.state.items.findIndex(item => item.summons_number === summonsNumber)
+      this.setState({
+        count: index,
+        job: 'Guest Page Search'
+      })
+    }
+    else {
+      alert('Invalid Summons Number, please try again.')
+    }
+  }
+
+
   navBar = () => {
     if (this.state.loggedIn === false) {
       return (
@@ -93,6 +121,28 @@ class App extends Component {
     else if (job === 'Display Summons Image') {
       return (
         <img src={items[1].summons_image.url}></img>
+      )
+    }
+
+    else if (job === 'Guest Page') {
+      return (
+        <div className="App" >
+          {navBar}
+          <h2>Enter Summons Number:</h2>
+          <input type='text' id='summonsNumber'></input>
+          <button onClick={this.checkSummonsNumberIndex}>Submit</button>
+        </div>
+      )
+    }
+
+    else if (job === 'Guest Page Search') {
+      return (
+        <div className="App" >
+          {navBar}
+          <h1>Summons Image</h1>
+          <embed src={this.state.items[count].summons_image.url} width="600" height="500" type="application/pdf"></embed>
+          <button onClick={this.guest}>Another search</button>
+        </div>
       )
     }
 
