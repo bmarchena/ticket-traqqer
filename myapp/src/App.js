@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import signUp from './signUp';
+import SignUp from './signUp';
 
 class App extends Component {
   constructor(props) {
@@ -10,7 +9,7 @@ class App extends Component {
       //what needs to be done
       job: 'Home Page',
       loggedIn: false,
-      count: 0,
+      count: null,
       items: []
     }
   }
@@ -27,28 +26,48 @@ class App extends Component {
       )
   }
 
-  guest = (e) => {
-    console.log(this.state.items[1].summons_image.url)
-    // this.setState({
-    //   job: 'Display Summons Image'
-    // })
+  login = () => {
+    this.setState({
+      job: 'Login Page'
+    })
   }
 
+  guest = () => {
+    this.setState({
+      job: 'Guest Page'
+    })
+  }
+
+  checkSummonsNumberIndex = () => {
+    let summonsNumber = document.getElementById('summonsNumber').value
+    if (!this.state.items.summons_number.includes(summonsNumber)) {
+      alert('Invalid Summons Number, please try again.')
+    }
+    else {
+      let index = this.state.items.findIndex(item => item.summons_number === summonsNumber)
+      this.setState({
+        count: index,
+        job: 'Guest Page Search'
+      })
+    }
+  }
+
+  //this.state.items[0].summons_image.url
 
   navBar = () => {
     if (!this.state.loggedIn) {
       return (
         <nav className="">
-          <h1>Ticket Traqqer</h1>
+          <h1>TicketTraqqer</h1>
           <a href='index.js' onClick={this.login}>Login</a>
-          <a onClick={signUp}>Signup</a>
+          <a onClick={SignUp}>Signup</a>
         </nav>
       )
     }
-    if (this.state.loggedIn) {
+    else if (this.state.loggedIn) {
       return (
         <nav className="">
-          <h1>Ticket Traqqer</h1>
+          <h1>TicketTraqqer</h1>
           <button onClick={this.homePage}>Home</button>
           <button onClick={this.login}>Logout</button>
         </nav>
@@ -64,16 +83,33 @@ class App extends Component {
       return (
         <div className="App" >
           {navBar}
-          <h1>Ticket Traqqer</h1>
+          <h1>Welcome to TicketTraqqer!</h1>
           <button onClick={this.login}>Log In</button>
+          <h2>or</h2>
           <button onClick={this.guest}>Continue As Guest</button>
         </div>
       );
     }
 
-    else if (job === 'Display Summons Image') {
+    else if (job === 'Guest Page') {
       return (
-        <img src={items[1].summons_image.url}></img>
+        <div className="App" >
+          {navBar}
+          <h2>Enter Summons Number:</h2>
+          <input type='text' id='summonsNumber'></input>
+          <button onClick={this.checkSummonsNumberIndex}>Submit</button>
+        </div>
+      )
+    }
+
+    else if (job === 'Guest Page Search') {
+      return (
+        <div className="App" >
+          {navBar}
+          <h1>Summons Image</h1>
+          <embed src={this.state.items[count].summons_image.url} width="600" height="500" type="application/pdf"></embed>
+          <button onClick={this.guest}>Another search</button>
+        </div>
       )
     }
   }

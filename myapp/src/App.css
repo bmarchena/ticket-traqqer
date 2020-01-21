@@ -36,3 +36,28 @@
     transform: rotate(360deg);
   }
 }
+
+/* Sign up page */
+.signUpHeading{
+  text-align: center;
+  line-height: 20vh;
+}
+
+.signUpForm{
+  margin-left: 40vw;
+}
+
+.signUpForm input{
+  width: 15rem;
+  padding: 8px;
+  border-radius: 2px;
+  display: flex;
+}
+
+.signUpForm button{
+  padding: 7px;
+  border-radius: 2px;
+  font-size: 1.005rem;
+  background: #B9EEBC;
+  margin-left: 8vw;
+}
