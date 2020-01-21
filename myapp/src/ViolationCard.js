@@ -13,7 +13,7 @@ class ViolationCard extends Component {
                       <p>Fine: ${this.props.violationFine}</p>
                 </div>
                 <div className="violationCardFooter">
-                    <a href={this.props.violationSummons}>View Summons</a>
+                    <a href={this.props.violationSummons} target="_blank">View Summons</a>
                 </div>
             </div>
         )

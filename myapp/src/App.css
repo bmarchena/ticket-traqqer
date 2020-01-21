@@ -37,8 +37,11 @@
   }
 }
 
-/* Navbar */
+a:hover{
+  color: #b9eebc;
+}
 
+/* Navbar */
 .navbar {
   display: flex;
   background-color: #b9eebc;
@@ -95,4 +98,15 @@
   margin: 1rem 1rem;
   border: 2px solid black;
   width: 200px;
+}
+
+/* User Profile */
+.userProfile {
+  margin: 2rem;
+}
+
+.userProfileViolations {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
