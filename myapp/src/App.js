@@ -9,7 +9,8 @@ class App extends Component {
       job: 'Home Page',
       loggedIn: false,
       count: null,
-      items: []
+      items: [],
+      multipleTickets: 0
     }
   }
 
