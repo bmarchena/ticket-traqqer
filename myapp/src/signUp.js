@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 
-class signUp extends Component{
+class SignUp extends Component{
 
   // Check input to see if all inputs have been entered
   checkInput(event){
@@ -35,4 +35,4 @@ class signUp extends Component{
   }
 }
 
-export default signUp;
+export default SignUp;
