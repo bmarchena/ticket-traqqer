@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Login from './Login.js';
 import logo from './logo.svg';
 import './App.css';
 
@@ -12,6 +13,8 @@ class App extends Component {
       count: 0,
       items: []
     }
+
+    this.login = new Login
   }
 
   componentDidMount() {
@@ -37,22 +40,32 @@ class App extends Component {
   navBar = () => {
     if (!this.state.loggedIn) {
       return (
-        <nav className="">
+        <nav className="navbar">
           <h1>Ticket Traqqer</h1>
-          <button onClick={this.login}>Login</button>
-          <button onClick={this.signup}>Signup</button>
+          <div className="navbarButtons">
+            <button onClick={this.homePage}>Home</button>
+            <button onClick={this.login}>Logout</button>
+          </div>
         </nav>
       )
     }
     if (this.state.loggedIn) {
       return (
-        <nav className="">
+        <nav className="navbar">
           <h1>Ticket Traqqer</h1>
-          <button onClick={this.homePage}>Home</button>
-          <button onClick={this.login}>Logout</button>
+          <div className="navbarButtons">
+            <button onClick={this.homePage}>Home</button>
+            <button onClick={this.login}>Logout</button>
+          </div>
         </nav>
       )
     }
+  }
+
+  userLogin = () => {
+    this.setState({
+      job: 'User Login'
+    })
   }
 
   render() {
@@ -64,7 +77,7 @@ class App extends Component {
         <div className="App" >
           {navBar}
           <h1>Ticket Traqqer</h1>
-          <button onClick={this.login}>Log In</button>
+          <button onClick={this.userLogin}>Log In</button>
           <button onClick={this.guest}>Continue As Guest</button>
         </div>
       );
@@ -75,6 +88,16 @@ class App extends Component {
         <img src={items[1].summons_image.url}></img>
       )
     }
+
+    else if (job === 'User Login'){
+      return (
+        <div className="userLogin">
+          {navBar}
+          <Login />
+        </div>
+      )
+    }
+
   }
 }
 

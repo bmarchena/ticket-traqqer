@@ -36,3 +36,63 @@
     transform: rotate(360deg);
   }
 }
+
+/* Navbar */
+
+.navbar {
+  display: flex;
+  background-color: #b9eebc;
+  padding: 1rem;
+  justify-content: space-between;
+}
+
+.navbarButtons {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.navbarButtons button {
+  margin: 0 2rem;
+}
+
+/* Login Page */
+.loginPage {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 2rem;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+
+.loginForm input {
+  width: 12rem;
+  margin: 1rem 0rem;
+  align-self: center;
+}
+
+.loginForm button {
+  margin-top: 1rem;
+  max-width: 100px;
+  align-self: center;
+  background-color: #b9eebc;
+}
+
+.loginForm p {
+  margin-top: 2rem;
+}
+
+/* Violation Card */
+.violationCard {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 0.5rem 0.5rem;
+  margin: 1rem 1rem;
+  border: 2px solid black;
+  width: 200px;
+}
