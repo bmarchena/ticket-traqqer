@@ -39,19 +39,24 @@ class App extends Component {
 
   checkSummonsNumberIndex = () => {
     let summonsNumber = document.getElementById('summonsNumber').value
-    if (!this.state.items.summons_number.includes(summonsNumber)) {
-      alert('Invalid Summons Number, please try again.')
+    let validNumber = false
+    for (let i = 0; i < this.state.items.length; i++) {
+      if (this.state.items[i].summons_number == summonsNumber) {
+        validNumber = true
+        break
+      }
     }
-    else {
+    if (validNumber) {
       let index = this.state.items.findIndex(item => item.summons_number === summonsNumber)
       this.setState({
         count: index,
         job: 'Guest Page Search'
       })
     }
+    else {
+      alert('Invalid Summons Number, please try again.')
+    }
   }
-
-  //this.state.items[0].summons_image.url
 
   navBar = () => {
     if (!this.state.loggedIn) {
