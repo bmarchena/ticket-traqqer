@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Login from './Login.js';
 import logo from './logo.svg';
 import './App.css';
+import signUp from './signUp';
 
 class App extends Component {
   constructor(props) {
@@ -30,7 +31,7 @@ class App extends Component {
   }
 
   guest = (e) => {
-    console.log(this.state.items[0].summons_image.url)
+    console.log(this.state.items[1].summons_image.url)
     // this.setState({
     //   job: 'Display Summons Image'
     // })
@@ -42,10 +43,15 @@ class App extends Component {
       return (
         <nav className="navbar">
           <h1>Ticket Traqqer</h1>
+<<<<<<< HEAD
           <div className="navbarButtons">
             <button onClick={this.homePage}>Home</button>
             <button onClick={this.login}>Logout</button>
           </div>
+=======
+          <a href='index.js' onClick={this.login}>Login</a>
+          <a onClick={signUp}>Signup</a>
+>>>>>>> origin/ao_branch
         </nav>
       )
     }
