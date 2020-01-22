@@ -1,10 +1,13 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './App.css';
 
 class Login extends Component {
 
-    render(){
-        return(
+    constructor(props) {
+        super(props)
+    }
+    render() {
+        return (
             <div className="loginPage">
                 <div>
                     <h1>Log In</h1>
@@ -12,9 +15,9 @@ class Login extends Component {
                 <form className="loginForm">
                     <input type="text" placeholder="Username"></input>
                     <input type="text" placeholder="Password"></input>
-                    <button>Login</button>
+                    <button onClick={this.props.login}>Login</button>
                     <p>Forgot your password? Reset it <a href=''>here!</a></p>
-                </form>   
+                </form>
             </div>
         )
     }
