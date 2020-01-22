@@ -87,12 +87,15 @@ class App extends Component {
       console.log(platenum)
       console.log(this.state.items[0].plate)
       let validPlate = false
+      let j = 0
       for (let i = 0; i < this.state.items.length; i++) {
+        j++
         if (this.state.items[i].plate === platenum) {
           validPlate = true
           this.countAccount.push(i)
         }
       }
+      alert(j)
       if (validPlate) {
         this.setState({
           job: 'Account Home'
