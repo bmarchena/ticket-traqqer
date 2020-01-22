@@ -1,3 +1,17 @@
+body{
+  background-color: rgb(230, 230, 230);
+}
+
+body h3{
+  margin: 20px;
+  padding: 50px;
+}
+
+body a{
+  color:blue;
+  cursor: pointer;
+}
+
 .App {
   text-align: center;
 }
@@ -46,13 +60,11 @@
   justify-content: space-between;
 }
 
-.navbarButtons {
-  margin-top: auto;
-  margin-bottom: auto;
-}
-
-.navbarButtons button {
-  margin: 0 2rem;
+.navbar li{
+  padding: 1rem;
+  margin:auto;
+  display: inline;
+  
 }
 
 /* Login Page */
@@ -95,4 +107,17 @@
   margin: 1rem 1rem;
   border: 2px solid black;
   width: 200px;
+}
+
+.footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #222;
+  color: #b9eebc;
+  padding: 1.5rem 0;
+  margin: auto;
+  font-size: .5em;
+  text-align: center;
 }

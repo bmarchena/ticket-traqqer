@@ -28,6 +28,12 @@ class App extends Component {
       )
   }
 
+  goHome = () => {
+    this.setState({
+      job: 'Home Page'
+    })
+  }
+
   userLogin = () => {
     this.setState({
       job: 'User Login'
@@ -74,6 +80,13 @@ class App extends Component {
     alert('button works')
   }
 
+  passwordReset = (e) => {
+    e.preventDefault()
+    this.setState({
+      job: 'Change Password'
+    })
+  }
+
   // Check input to see if all inputs have been entered
   checkInput = (e) => {
     e.preventDefault()
@@ -107,19 +120,19 @@ class App extends Component {
     }
   }
 
-  ticketCount = () => {
-    return this.countAccount.length
+  checkUsername = (e) => {
+
   }
 
   navBar = () => {
     if (this.state.loggedIn === false) {
       return (
         <nav className="navbar">
-          <h1>Ticket Traqqer</h1>
-          <div className="navbarButtons">
-            <button onClick={this.userLogin}>Log In</button>
-            <button onClick={this.userSignup}>Sign Up</button>
-          </div>
+          <h1><a onClick={this.goHome}>Ticket Traqqer</a></h1>
+          <ul>
+            <li><a onClick={this.userLogin}>Log In</a></li>
+            <li><a onClick={this.userSignup}>Sign Up</a></li>
+          </ul>
         </nav>
       )
     }
@@ -128,27 +141,41 @@ class App extends Component {
         <nav className="navbar">
           <h1>Ticket Traqqer</h1>
           <div className="navbarButtons">
-            <button onClick={this.homePage}>Home</button>
-            <button onClick={this.userLogin}>Logout</button>
+            <ul>
+              <li><a onClick={this.homePage}>Account</a></li>
+              <li><a onClick={this.userLogin}>Logout</a></li>
+            </ul>
           </div>
         </nav>
       )
     }
   }
 
-  render() {
-    let { job, count, navBar } = this.state
-    navBar = this.navBar()
+  footer = () => {
+    return (
+      <div className='footer'>
+        <h1>Copyright &copy; 2020, TicketTraqqer, All Rights Reserved</h1>
+      </div>
+    )
+  }
 
+  render() {
+    let { job, count, navBar, footer } = this.state
+    navBar = this.navBar()
+    footer = this.footer()
     if (job === 'Home Page') {
       return (
         <div className="App" >
           {navBar}
           <h1>Welcome to Ticket Traqqer!</h1>
+          <h3>Here at Ticket Traqqer, we allow users to manage their parking and camera violation tickets.<br /><br />
+            These violations in New York City are public and we have made it simple for you to either search for a specific ticket, or you may make an account to save your tickets and stay up to date on paying your fine.</h3>
           <button onClick={this.userLogin}>Log In</button>
           <h2>or</h2>
           <button onClick={this.guest}>Continue As Guest</button>
+          {footer}
         </div>
+
       );
     }
 
@@ -159,6 +186,7 @@ class App extends Component {
           <h2>Enter Summons Number:</h2>
           <input type='text' id='summonsNumber'></input>
           <button onClick={this.checkSummonsNumberIndex}>Submit</button>
+          {footer}
         </div>
       )
     }
@@ -171,6 +199,7 @@ class App extends Component {
           <embed src={this.state.items[count].summons_image.url} width="600" height="500" type="application/pdf"></embed>
           <br />
           <button onClick={this.guest}>Another search</button>
+          {footer}
         </div>
       )
     }
@@ -179,7 +208,8 @@ class App extends Component {
       return (
         <div className="userLogin">
           {navBar}
-          <Login login={this.login}/>
+          <Login login={this.login} passwordReset={this.passwordReset} />
+          {footer}
         </div>
       )
     }
@@ -187,7 +217,8 @@ class App extends Component {
     else if (job === "User Signup") {
       return (
         <div className="userLogin">{navBar}
-          <SignUp checkInput={this.checkInput}/>
+          <SignUp checkInput={this.checkInput} />
+          {footer}
         </div>
 
       )
@@ -199,6 +230,21 @@ class App extends Component {
           {navBar}
           <h1>Welcome USERNAME</h1>
           <h2>You have {this.countAccount.length} parking violations.</h2>
+          {footer}
+        </div>
+      )
+    }
+
+    else if (job === "Change Password") {
+      return (
+        <div className="App" >
+          {navBar}
+          <h1>Change Password</h1>
+          <label>Enter your username:</label>
+          <input type='type' id='checkUsername'></input>
+          <button onClick={this.checkUsername}>Submit</button>
+          <p>Forgot your username? Reset it <a onClick={this.usernameReset}>here!</a> </p>
+          {footer}
         </div>
       )
     }
