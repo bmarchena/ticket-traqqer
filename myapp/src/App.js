@@ -86,15 +86,12 @@ class App extends Component {
       console.log(platenum)
       console.log(this.state.items[0].plate)
       let validPlate = false
-      let j = 0
       for (let i = 0; i < this.state.items.length; i++) {
-        j++
         if (this.state.items[i].plate === platenum) {
           validPlate = true
           this.countAccount.push(i)
         }
       }
-      alert(j)
       if (validPlate) {
         this.setState({
           job: 'Account Home'
@@ -114,7 +111,7 @@ class App extends Component {
     if (this.state.loggedIn === false) {
       return (
         <nav className="navbar">
-          <h1>Ticket Traqqer</h1>
+          <h1 className="h-heading">TicketTraqqer</h1>
           <div className="navbarButtons">
             <button onClick={this.userLogin}>Log In</button>
             <button onClick={this.userSignup}>Sign Up</button>
@@ -125,7 +122,7 @@ class App extends Component {
     if (this.state.loggedIn === true) {
       return (
         <nav className="navbar">
-          <h1>Ticket Traqqer</h1>
+          <h1 className="h-heading">TicketTraqqer</h1>
           <div className="navbarButtons">
             <button onClick={this.homePage}>Home</button>
             <button onClick={this.userLogin}>Logout</button>
@@ -143,7 +140,7 @@ class App extends Component {
       return (
         <div className="App" >
           {navBar}
-          <h1>Welcome to Ticket Traqqer!</h1>
+          <h1>Welcome to TicketTraqqer!</h1>
           <button onClick={this.userLogin}>Log In</button>
           <h2>or</h2>
           <button onClick={this.guest}>Continue As Guest</button>
