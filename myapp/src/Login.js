@@ -19,6 +19,7 @@ class Login extends Component {
                     <input type="text" placeholder="Password"></input>
                     <button onClick={this.props.login}>Login</button>
                     <p>Forgot your password? Reset it <a onClick={this.props.passwordReset}>here!</a> </p>
+                    <p>Forgot your username? Reset it <a onClick={this.props.usernameReset}>here!</a> </p>
                 </form>
             </div>
         )
