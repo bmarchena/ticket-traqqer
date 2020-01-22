@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import UserProfile from './UserProfile';
 import App from './App';
-import SignUp from './SignUp';
+import SignUp from './signUp';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));
