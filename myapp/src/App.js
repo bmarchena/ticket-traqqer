@@ -26,7 +26,7 @@ class App extends Component {
           })
         }
       )
-  }
+  };
 
   guest = (e) => {
     console.log(this.state.items[1].summons_image.url)
