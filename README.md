@@ -1,7 +1,7 @@
 # Final Project (TicketTraqqer)
 
 ## Purpose/Goal
-TicketTraqqer is a web application aimed at helping users view their driving violations via Open Parking and Camera Violations, which is a dataset that contains all violations contained in the NYC OpenData mainframe database as of May 2016.
+TicketTraqqer is a web application aimed at helping users view their driving violations via Open Parking and Camera Violations, which is a dataset that contains all violations contained in the NYC OpenData mainframe database since May 2016.
 
 ## Languages/Frameworks Used
 1. React (frontend)
