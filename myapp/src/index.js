@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+<<<<<<< HEAD
 import UserProfile from './UserProfile';
+=======
+>>>>>>> origin/ev_branch
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
