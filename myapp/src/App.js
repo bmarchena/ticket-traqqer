@@ -4,6 +4,15 @@ import SignUp from './SignUp';
 import logo from './logo.svg';
 import './App.css';
 
+const db = require('./util/database')
+db.execute('SELECT * FROM users')
+  .then(result => {
+    console.log(result)
+  })
+  .catch(error => {
+    console.log(error)
+  })
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -14,6 +23,7 @@ class App extends Component {
       count: 0,
       items: []
     }
+
   }
 
   componentDidMount() {
