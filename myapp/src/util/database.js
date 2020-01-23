@@ -1,10 +1,18 @@
-const mysql = require('mysql2');
+const express = require('express')
+const cors = require('cors')
 
-const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    database: 'traqqerUsers',
-    password: 'superfly'
-});
+const expApp = express()
 
-module.exports = pool.promise();
+expApp.use(cors())
+
+expApp.get('/', function(req, res){
+    console.log('here')
+    res.json(null)
+})
+
+expApp.post('/add', function(req, res){
+    console.log('here')
+    res.json(null)
+})
+
+expApp.listen(5000)

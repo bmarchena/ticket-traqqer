@@ -1,16 +1,7 @@
 import React, { Component } from 'react';
 import Login from './Login.js';
-import SignUp from './signUp';
+import SignUp from './SignUp.js';
 import './App.css';
-
-const db = require('./util/database')
-db.execute('SELECT * FROM users')
-  .then(result => {
-    console.log(result)
-  })
-  .catch(error => {
-    console.log(error)
-  })
 
 class App extends Component {
   constructor(props) {
@@ -19,14 +10,9 @@ class App extends Component {
       //what needs to be done
       job: 'Home Page',
       loggedIn: false,
-      count: null,
-      items: [],
+      count: 0,
+      items: []
     }
-<<<<<<< HEAD
-
-=======
-    this.countAccount = []
->>>>>>> origin/ev_branch
   }
 
   componentDidMount() {
@@ -39,7 +25,18 @@ class App extends Component {
           })
         }
       )
+
   }
+
+  guest = (e) => {
+    console.log(this.state.items[1].summons_image.url)
+    // this.setState({
+    //   job: 'Display Summons Image'
+    // })
+  }
+
+
+  
 
   userLogin = () => {
     this.setState({
@@ -52,11 +49,7 @@ class App extends Component {
       job: "User Signup"
     })
   }
-<<<<<<< HEAD
   
-=======
-
->>>>>>> origin/ev_branch
   guest = () => {
     this.setState({
       job: 'Guest Page'
@@ -65,17 +58,9 @@ class App extends Component {
 
   checkSummonsNumberIndex = () => {
     let summonsNumber = document.getElementById('summonsNumber').value
-<<<<<<< HEAD
     let validNumber = false
     for (let i = 0; i < this.state.items.length; i++) {
       if (this.state.items[i].summons_number == summonsNumber) {
-=======
-    console.log(summonsNumber)
-    console.log(this.state.items[0].summons_number)
-    let validNumber = false
-    for (let i = 0; i < this.state.items.length; i++) {
-      if (this.state.items[i].summons_number === summonsNumber) {
->>>>>>> origin/ev_branch
         validNumber = true
         break
       }
@@ -92,16 +77,15 @@ class App extends Component {
     }
   }
 
-<<<<<<< HEAD
-=======
-  login = (e) => {
-    e.preventDefault()
-    alert('button works')
-  }
-
   // Check input to see if all inputs have been entered
   checkInput = (e) => {
     e.preventDefault()
+
+    // xhttp = new XMLHttpRequest()
+
+    // xhttp.open("POST", "http://localhost:5000", true)
+    // xhttp.setRequestHeader("New-User", "")
+
     let username = document.getElementById('usernameField').value;
     let pass = document.getElementById('passwordField').value;
     let platenum = document.getElementById('plateNumberField').value;
@@ -111,28 +95,58 @@ class App extends Component {
     else {
       console.log(platenum)
       console.log(this.state.items[0].plate)
-      let validPlate = false
-      for (let i = 0; i < this.state.items.length; i++) {
-        if (this.state.items[i].plate === platenum) {
-          validPlate = true
-          this.countAccount.push(i)
-        }
-      }
-      if (validPlate) {
-        this.setState({
-          job: 'Account Home'
-        })
-      }
-      else {
-        alert('Invalid plate number, please try again.')
-      }
+
+      // fetch('http://localhost:5000', {
+      //   method: 'post',
+      //   body: {username, pass, platenum}
+      // })
+   /*   fetch('http://localhost:5000/', {
+        method: 'get',
+        mode: 'no-cors'
+      })
+      .then(response => console.log(response))
+      .catch(err => console.log(err))
+
+      */
+
+     const response = fetch('http://localhost:5000/', {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ 
+        username: username,
+        password: pass,
+        plateno: platenum
+      }),
+    }).then((response) => {
+      return response.json();
+    })
+    .then((myJson) => {
+      console.log(myJson);
+    });
+
+
+      // let validPlate = false
+      // let j = 0
+
+      // for (let i = 0; i < this.state.items.length; i++) {
+      //   j++
+      //   if (this.state.items[i].plate === platenum) {
+      //     validPlate = true
+      //     this.countAccount.push(i)
+      //   }
+      
+      // }
+      // alert(j)
+      // if (validPlate) {
+      //   this.setState({
+      //     job: 'Account Home'
+      //   })
+      // }
+      // else {
+      //   alert('Invalid plate number, please try again.')
+      // }
     }
   }
-
-  ticketCount = () => {
-    return this.countAccount.length
-  }
->>>>>>> origin/ev_branch
 
   navBar = () => {
     if (this.state.loggedIn === false) {
@@ -152,7 +166,7 @@ class App extends Component {
           <h1>Ticket Traqqer</h1>
           <div className="navbarButtons">
             <button onClick={this.homePage}>Home</button>
-            <button onClick={this.userLogin}>Logout</button>
+            <button onClick={this.login}>Logout</button>
           </div>
         </nav>
       )
@@ -160,7 +174,7 @@ class App extends Component {
   }
 
   render() {
-    let { job, count, navBar } = this.state
+    let { job, count, navBar, items } = this.state
     navBar = this.navBar()
 
     if (job === 'Home Page') {
@@ -169,36 +183,17 @@ class App extends Component {
           {navBar}
           <h1>Welcome to Ticket Traqqer!</h1>
           <button onClick={this.userLogin}>Log In</button>
-          <h2>or</h2>
           <button onClick={this.guest}>Continue As Guest</button>
         </div>
       );
     }
 
-    else if (job === 'Guest Page') {
+    else if (job === 'Display Summons Image') {
       return (
-        <div className="App" >
-          {navBar}
-          <h2>Enter Summons Number:</h2>
-          <input type='text' id='summonsNumber'></input>
-          <button onClick={this.checkSummonsNumberIndex}>Submit</button>
-        </div>
+        <img src={items[1].summons_image.url}></img>
       )
     }
 
-    else if (job === 'Guest Page Search') {
-      return (
-        <div className="App" >
-          {navBar}
-          <h1>Summons Image</h1>
-          <embed src={this.state.items[count].summons_image.url} width="600" height="500" type="application/pdf"></embed>
-          <br />
-          <button onClick={this.guest}>Another search</button>
-        </div>
-      )
-    }
-
-<<<<<<< HEAD
     else if (job === 'Guest Page') {
       return (
         <div className="App" >
@@ -222,35 +217,23 @@ class App extends Component {
     }
 
     else if (job === 'User Login'){
-=======
-    else if (job === 'User Login') {
->>>>>>> origin/ev_branch
       return (
         <div className="userLogin">
           {navBar}
-          <Login login={this.login}/>
+          <Login />
         </div>
       )
     }
 
-    else if (job === "User Signup") {
+    else if (job === "User Signup"){
       return (
-        <div className="userLogin">{navBar}
+        <div>
+          {navBar}
           <SignUp checkInput={this.checkInput}/>
         </div>
-
       )
     }
 
-    else if (job === "Account Home") {
-      return (
-        <div className="App" >
-          {navBar}
-          <h1>Welcome USERNAME</h1>
-          <h2>You have {this.countAccount.length} parking violations.</h2>
-        </div>
-      )
-    }
   }
 }
 
