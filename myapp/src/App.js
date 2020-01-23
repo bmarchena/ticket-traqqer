@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Login from './Login.js';
 import SignUp from './SignUp.js';
+import UserProfile from './UserProfile.js';
 import './App.css';
 import logo from './nyc_bg.jpg'
 
@@ -14,6 +15,9 @@ class App extends Component {
       count: 0,
       items: []
     }
+
+    let username = ''
+    let plateno = ''
   }
 
   componentDidMount() {
@@ -37,10 +41,44 @@ class App extends Component {
 
   
 
-  userLogin = () => {
+  userLogin = (e) => {
     this.setState({
       job: 'User Login'
     })
+  }
+
+  login = async (e) => {
+    e.preventDefault()
+    let username = document.getElementById('loginUsername').value;
+    let pass = document.getElementById('loginPassword').value;
+
+    const response = await fetch('http://localhost:5000/login', {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ 
+        username: username,
+        password: pass
+      }),
+    }).then((response) => {
+      console.log('Response', response)
+      return response.json();
+    })
+    .then((myJson) => {
+      let userInfo = JSON.parse(myJson.response)
+      console.log("Fetch Login", userInfo);
+      this.username = userInfo.username
+      this.plateno = userInfo.plateno
+
+      console.log('Username after: ', this.username)
+      console.log('Plateno after: ', this.plateno)
+    });
+
+    console.log('changin state')
+    this.setState({
+      job: "User Profile",
+      loggedIn: true
+    })
+
   }
 
   userSignup = () => {
@@ -89,7 +127,7 @@ class App extends Component {
       console.log(platenum)
       console.log(this.state.items[0].plate)
 
-     const response = fetch('http://localhost:5000/', {
+     const response = fetch('http://localhost:5000/addUser', {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ 
@@ -105,6 +143,13 @@ class App extends Component {
     });
 
     }
+
+    window.alert("Sign-up successful! Please log in.")
+
+    this.setState({
+      job: 'User Login'
+    })
+
   }
 
   navBar = () => {
@@ -252,7 +297,18 @@ class App extends Component {
         </div>
       )
     }
+
+    else if(job==='User Profile'){
+      return(
+        <div className="App">
+          {navBar}
+          <UserProfile user={this.username} plate={this.plateno}/>
+        </div>
+      )
+    }
+
   }
+
 }
 
 export default App;

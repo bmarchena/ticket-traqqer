@@ -2,16 +2,10 @@ const express = require('express')
 const cors = require('cors')
 let bodyParser = require('body-parser')
 const expApp = express()
-
-// create application/json parser
-//var jsonParser = bodyParser.json()
-// create application/x-www-form-urlencoded parser
-//var urlencodedParser = bodyParser.urlencoded({ extended: false })
-
+const fetch = require('node-fetch')
 
 expApp.use(bodyParser.urlencoded({ extended: true }));
 expApp.use(bodyParser.json());
-
 
 expApp.use(cors())
 
@@ -27,20 +21,38 @@ const connection = mysql.createConnection({
 connection.connect()
 
 
-expApp.post('/', function (req, res) {
+expApp.post('/addUser', function (req, res) {
     let sql = `INSERT INTO users(username, password, plateno) VALUES('${req.body.username}', '${req.body.password}', '${req.body.plateno}')`
 
     connection.query(sql)
     console.log(req.body)
-    res.json({data:"proplr"})
   })
 
+ expApp.post('/login', async function(req, res) {
+    let sql = `SELECT * FROM users HAVING username = '${req.body.username}' AND password = '${req.body.password}'` ;
+
+    let response
+
+    connection.query(sql, async function (err, result) {
+         if (err)
+             throw err;
+        console.log('Object Keys', Object.keys(result))
+
+        Object.keys(result).forEach(async function (key) {
+            let row = result[key];
+            response = JSON.stringify(row);
+            console.log('stringify', response);
+            res.json({response})
+        });
+     })
+
+    console.log('BEFORE SENDING:', response)
+
+})
 
 
   
 expApp.get('/', function(req, res){
-
-    // console.log(req);
     console.log('i am the get')
     res.json(null)
 })

@@ -3,11 +3,12 @@ import ViolationCard from './ViolationCard.js';
 import './App.css';
 
 class UserProfile extends Component{
+
     render() {
         return (
             <div className="userProfile">
                 <div className="userProfileHeading">
-                <p>Hello, 'USERNAME'. You currently have 'NUMBER' recorded violations on plate no. 'PLATENUMBER'.</p>
+                <p>Hello, {this.props.user}! You currently have 'NUMBER' recorded violations on plate no. {this.props.plate}.</p>
                 <p>Here are your recorded violations, by most recent:</p>
                 </div>
                 <div className="userProfileViolations"> 
