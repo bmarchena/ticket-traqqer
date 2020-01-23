@@ -56,15 +56,19 @@ body a{
 .navbar {
   display: flex;
   background-color: #b9eebc;
-  padding: 1rem;
+  padding: .5rem;
   justify-content: space-between;
+  font-size: 1.5rem;
+}
+
+.navbar #leftButton{
+  font-size:1.5rem;
 }
 
 .navbar li{
   padding: 1rem;
   margin:auto;
   display: inline;
-  
 }
 
 /* Login Page */

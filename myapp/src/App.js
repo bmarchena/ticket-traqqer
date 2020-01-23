@@ -140,8 +140,10 @@ class App extends Component {
     if (this.state.loggedIn === false) {
       return (
         <nav className="navbar">
-          <h1><a onClick={this.goHome}>Ticket Traqqer</a></h1>
-          <ul>
+          <ul id='leftButton'>
+            <li><a onClick={this.goHome}>Ticket Traqqer</a></li>
+          </ul>
+          <ul id='rightButtons'>
             <li><a onClick={this.userLogin}>Log In</a></li>
             <li><a onClick={this.userSignup}>Sign Up</a></li>
           </ul>
@@ -152,12 +154,12 @@ class App extends Component {
       return (
         <nav className="navbar">
           <h1><a onClick={this.goHome}>Ticket Traqqer</a></h1>
-          <div className="navbarButtons">
-            <ul>
-              <li><a onClick={this.homePage}>Account</a></li>
-              <li><a onClick={this.userLogin}>Logout</a></li>
-            </ul>
-          </div>
+
+          <ul>
+            <li><a onClick={this.homePage}>Account</a></li>
+            <li><a onClick={this.userLogin}>Logout</a></li>
+          </ul>
+
         </nav>
       )
     }
