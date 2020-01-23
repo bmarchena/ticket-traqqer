@@ -106,7 +106,7 @@ class App extends Component {
         if (this.state.items[i].plate === platenum) {
           validPlate = true
           ticketCount ++
-          ticketFine = ticketFine + Number(this.state.items[i].fine_amount)
+          ticketFine = ticketFine + this.state.items[i].fine_amount
           console.log(ticketFine)
         }
       }
