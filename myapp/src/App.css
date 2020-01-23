@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Orbitron|Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 /* General settings */
 body{
@@ -26,6 +26,10 @@ a:hover{
 button{
   background-color: #b9eebc;
   font-size: 1.1rem;
+  font-family: 'Roboto';
+}
+
+::placeholder{
   font-family: 'Roboto';
 }
 
@@ -131,7 +135,7 @@ button{
 }
 
 .footer{
-  
+  position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;

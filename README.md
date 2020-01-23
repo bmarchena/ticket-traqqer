@@ -23,3 +23,9 @@ Without an account, one can search for a violation based on their summons number
 
 ## Wireframes (Website draft)
 ![All pages](myapp/src/img/TicketTraqqerWireFrames.png)
+
+
+## Special Thanks
+- Prof. Steven Falukeza
+- CUNY2X/Tech Talent Pipeline
+- Stack Overflow
