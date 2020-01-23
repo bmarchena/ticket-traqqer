@@ -124,10 +124,10 @@ class App extends Component {
     if (this.state.loggedIn === false) {
       return (
         <nav className="navbar">
-          <h1><a className="dunno" onClick={this.goHome}>TicketTraqqer</a></h1>
+          <h1><a className="navlink" onClick={this.goHome}>TicketTraqqer</a></h1>
           <ul>
-            <li><a className="dunno" onClick={this.userLogin}>Log In</a></li>
-            <li><a className="dunno" onClick={this.userSignup}>Sign Up</a></li>
+            <li><a className="navlink" onClick={this.userLogin}>Log In</a></li>
+            <li><a className="navlink" onClick={this.userSignup}>Sign Up</a></li>
           </ul>
         </nav>
       )
@@ -137,8 +137,8 @@ class App extends Component {
         <nav className="navbar">
           <h1><a onClick={this.goHome}>TicketTraqqer</a></h1>
             <ul>
-              <li><a className="dunno" onClick={this.homePage}>Account</a></li>
-              <li><a className="dunno" onClick={this.userLogin}>Logout</a></li>
+              <li><a className="navlink" onClick={this.homePage}>Account</a></li>
+              <li><a className="navlink" onClick={this.userLogin}>Logout</a></li>
             </ul>
         </nav>
       )
@@ -147,9 +147,13 @@ class App extends Component {
 
   footer = () => {
     return (
-      <div className='footer'>
-        <h1>Copyright &copy; 2020, TicketTraqqer, All Rights Reserved</h1>
+      <div>
+        <div className="phantom"/>
+        <div className='footer'>
+          <h1>Copyright &copy; 2020, TicketTraqqer, All Rights Reserved</h1>
+        </div>
       </div>
+      
     )
   }
 
