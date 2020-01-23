@@ -8,8 +8,9 @@ Without an account, one can search for a violation based on their summons number
 ## Languages/Frameworks Used
 1. React (frontend)
 2. MySQL (backend/database)
-3. HTML/CSS (frontend)
-4. Open Parking and Camera Violations (API)
+3. Express (backend/server)
+4. HTML/CSS (frontend)
+5. Open Parking and Camera Violations (API)
 
 ## Duties:
 - __Bryan Marchena__:

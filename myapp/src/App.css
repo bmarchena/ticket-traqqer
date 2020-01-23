@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Orbitron|Roboto&display=swap');
+
 /* General settings */
 body{
   background-color: rgb(230, 230, 230);
@@ -24,6 +26,7 @@ a:hover{
 button{
   background-color: #b9eebc;
   font-size: 1.1rem;
+  font-family: 'Roboto';
 }
 
 /* Navbar */
@@ -31,7 +34,6 @@ button{
   width:100%;
   display: flex;
   background-color: #b9eebc;
-  padding: .5rem;
   justify-content: space-between;
 }
 
@@ -43,6 +45,7 @@ button{
 }
 
 .navlink{
+  font-family: 'Roboto';
   color: #222;
   padding: 1.05rem;
 }
@@ -122,7 +125,7 @@ button{
 
 .phantom{
   display: block;
-  padding: 60px;
+  padding: 7rem;
   height: '60px';
   width: '100%';
 }
