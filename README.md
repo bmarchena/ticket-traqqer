@@ -18,7 +18,7 @@ Without an account, one can search for a violation based on their summons number
     - Creating the App component on App.js
 - __Andrew Ohakam__: 
     - Designing website wireframes (see below)
-    - general stylization (sign-up sheet, navigation bar)
+    - general stylization (sign-up sheet, navbar and footer fixes)
     - Creating Sign-Up component
 
 ## Wireframes (Website draft)

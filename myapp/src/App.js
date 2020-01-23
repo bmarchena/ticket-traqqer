@@ -141,12 +141,13 @@ class App extends Component {
   footer = () => {
     return (
       <div>
+        {/* Phantom allows some space between page content and the footer */}
         <div className="phantom"/>
         <div className='footer'>
           <h1>Copyright &copy; 2020, TicketTraqqer, All Rights Reserved</h1>
+          <h1>Project Created By Bryan Marchena, Emmanuel Vargas-Zapata, and Andrew Ohakam</h1>
         </div>
       </div>
-      
     )
   }
 
