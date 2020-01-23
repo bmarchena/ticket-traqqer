@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Login from './Login.js';
 import SignUp from './SignUp.js';
 import './App.css';
+import logo from './nyc_bg.jpg'
 
 class App extends Component {
   constructor(props) {
@@ -25,14 +26,12 @@ class App extends Component {
           })
         }
       )
+  };
 
-  }
-
-  guest = (e) => {
-    console.log(this.state.items[1].summons_image.url)
-    // this.setState({
-    //   job: 'Display Summons Image'
-    // })
+  goHome = () => {
+    this.setState({
+      job: 'Home Page'
+    })
   }
 
 
@@ -49,7 +48,6 @@ class App extends Component {
       job: "User Signup"
     })
   }
-  
   guest = () => {
     this.setState({
       job: 'Guest Page'
@@ -81,11 +79,6 @@ class App extends Component {
   checkInput = (e) => {
     e.preventDefault()
 
-    // xhttp = new XMLHttpRequest()
-
-    // xhttp.open("POST", "http://localhost:5000", true)
-    // xhttp.setRequestHeader("New-User", "")
-
     let username = document.getElementById('usernameField').value;
     let pass = document.getElementById('passwordField').value;
     let platenum = document.getElementById('plateNumberField').value;
@@ -95,19 +88,6 @@ class App extends Component {
     else {
       console.log(platenum)
       console.log(this.state.items[0].plate)
-
-      // fetch('http://localhost:5000', {
-      //   method: 'post',
-      //   body: {username, pass, platenum}
-      // })
-   /*   fetch('http://localhost:5000/', {
-        method: 'get',
-        mode: 'no-cors'
-      })
-      .then(response => console.log(response))
-      .catch(err => console.log(err))
-
-      */
 
      const response = fetch('http://localhost:5000/', {
       method: 'POST',
@@ -124,27 +104,6 @@ class App extends Component {
       console.log(myJson);
     });
 
-
-      // let validPlate = false
-      // let j = 0
-
-      // for (let i = 0; i < this.state.items.length; i++) {
-      //   j++
-      //   if (this.state.items[i].plate === platenum) {
-      //     validPlate = true
-      //     this.countAccount.push(i)
-      //   }
-      
-      // }
-      // alert(j)
-      // if (validPlate) {
-      //   this.setState({
-      //     job: 'Account Home'
-      //   })
-      // }
-      // else {
-      //   alert('Invalid plate number, please try again.')
-      // }
     }
   }
 
@@ -152,46 +111,60 @@ class App extends Component {
     if (this.state.loggedIn === false) {
       return (
         <nav className="navbar">
-          <h1>Ticket Traqqer</h1>
-          <div className="navbarButtons">
-            <button onClick={this.userLogin}>Log In</button>
-            <button onClick={this.userSignup}>Sign Up</button>
-          </div>
+          <ul>
+            <li><a className='navlink' onClick={this.goHome}>Ticket Traqqer</a></li>
+          </ul>
+          <ul>
+            <li><a className='navlink' onClick={this.userLogin}>Log In</a></li>
+            <li><a className='navlink' onClick={this.userSignup}>Sign Up</a></li>
+          </ul>
         </nav>
       )
     }
+
     if (this.state.loggedIn === true) {
       return (
         <nav className="navbar">
-          <h1>Ticket Traqqer</h1>
-          <div className="navbarButtons">
-            <button onClick={this.homePage}>Home</button>
-            <button onClick={this.login}>Logout</button>
-          </div>
+          <ul>
+            <li><a className='navlink' onClick={this.goHome}>Ticket Traqqer</a></li>
+          </ul>
+          <ul>
+            <li><a className='navlink' onClick={this.homePage}>Account</a></li>
+            <li><a className='navlink' onClick={this.userLogin}>Logout</a></li>
+          </ul>
+
         </nav>
       )
     }
   }
 
+  footer = () => {
+    return (
+      <div className='footer'>
+        <h1>Copyright &copy; 2020, TicketTraqqer, All Rights Reserved</h1>
+      </div>
+    )
+  }
+
   render() {
-    let { job, count, navBar, items } = this.state
+    let { job, count, navBar, footer } = this.state
     navBar = this.navBar()
+    footer = this.footer()
 
     if (job === 'Home Page') {
       return (
         <div className="App" >
           {navBar}
           <h1>Welcome to Ticket Traqqer!</h1>
+          <img src={logo} alt='nyc' width='500' height='333' />
+          <h3>Here at Ticket Traqqer, we allow users to manage their parking and camera violation tickets.<br /><br />
+            These violations in New York City are public and we have made it simple for you to either search for a specific ticket, or you may make an account to save your tickets and stay up to date on paying your fine.</h3>
           <button onClick={this.userLogin}>Log In</button>
           <button onClick={this.guest}>Continue As Guest</button>
+          {footer}
         </div>
-      );
-    }
 
-    else if (job === 'Display Summons Image') {
-      return (
-        <img src={items[1].summons_image.url}></img>
-      )
+      );
     }
 
     else if (job === 'Guest Page') {
@@ -201,6 +174,7 @@ class App extends Component {
           <h2>Enter Summons Number:</h2>
           <input type='text' id='summonsNumber'></input>
           <button onClick={this.checkSummonsNumberIndex}>Submit</button>
+          {footer}
         </div>
       )
     }
@@ -211,29 +185,73 @@ class App extends Component {
           {navBar}
           <h1>Summons Image</h1>
           <embed src={this.state.items[count].summons_image.url} width="600" height="500" type="application/pdf"></embed>
+          <br />
           <button onClick={this.guest}>Another search</button>
+          {footer}
         </div>
       )
     }
 
-    else if (job === 'User Login'){
+    else if (job === 'User Login') {
       return (
         <div className="userLogin">
           {navBar}
-          <Login />
+          <Login login={this.login} passwordReset={this.passwordReset} usernameReset={this.usernameReset} />
+          {footer}
         </div>
       )
     }
 
-    else if (job === "User Signup"){
+    else if (job === "User Signup") {
       return (
-        <div>
+        <div className="userLogin">{navBar}
+          <SignUp checkInput={this.checkInput} />
+          {footer}
+        </div>
+
+      )
+    }
+
+    else if (job === "Account Home") {
+      return (
+        <div className="App" >
           {navBar}
-          <SignUp checkInput={this.checkInput}/>
+          <h1>Welcome USERNAME</h1>
+          <h2>You have {this.countAccount.length} parking violations.</h2>
+          {footer}
         </div>
       )
     }
 
+    else if (job === "Change Password") {
+      return (
+        <div className="App" >
+          {navBar}
+          <h1>Change Password</h1>
+          <label>Enter your username:</label>
+          <input type='type' id='checkUsername'></input>
+          <button onClick={this.checkUsername}>Submit</button>
+          {footer}
+        </div>
+      )
+    }
+
+    else if (job === "Change Username") {
+      return (
+        <div className="App" >
+          {navBar}
+          <h1>Change Username</h1>
+          <label>Enter your plate number:</label>
+          <input type='type' id='checkPlates'></input>
+          <br />
+          <label>Enter your password:</label>
+          <input type='type' id='checkPass'></input>
+          <br />
+          <button onClick={this.checkChangeUsername}>Submit</button>
+          {footer}
+        </div>
+      )
+    }
   }
 }
 

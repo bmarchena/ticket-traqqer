@@ -1,16 +1,19 @@
+body{
+  background-color: rgb(230, 230, 230);
+}
+
+body h3{
+  margin: 20px;
+  padding: 50px;
+}
+
+body a{
+  color:rgb(85, 85, 85);
+  cursor: pointer;
+}
+
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
 }
 
 .App-header {
@@ -24,39 +27,33 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 a:hover{
-  color: #b9eebc;
+  color: #fff;
 }
 
 /* Navbar */
 .navbar {
+  width:100%;
   display: flex;
   background-color: #b9eebc;
   padding: .5rem;
-  margin-bottom: 7.5rem;
   justify-content: space-between;
+  font-family: 'Courier New', Courier, monospace;
 }
 
-.navbarButtons {
-  margin-top: auto;
-  margin-bottom: auto;
+.navbar li{
+  padding: 1rem;
+  margin:auto;
+  display: inline;
+  max-height: 20px;
 }
 
-.navbarButtons button {
-  margin: 0 2rem;
+.navlink{
+  color: #222;
+}
+
+.navlink:hover{
+  background-color:#222;
 }
 
 /* Home Page */
@@ -117,4 +114,21 @@ a:hover{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.footer{
+  
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #222;
+  color: #b9eebc;
+  padding: 1.1rem 0;
+  margin: auto;
+  font-size: .5em;
+  text-align: center;
+}
+
+img{
+    border-radius:50%;
 }
