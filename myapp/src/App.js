@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Login from './Login.js';
-import SignUp from './signUp';
+import SignUp from './SignUp.js';
 import './App.css';
 import logo from './nyc_bg.jpg'
 
@@ -11,10 +11,9 @@ class App extends Component {
       //what needs to be done
       job: 'Home Page',
       loggedIn: false,
-      count: null,
-      items: [],
+      count: 0,
+      items: []
     }
-    this.countAccount = []
   }
 
   componentDidMount() {
@@ -35,6 +34,9 @@ class App extends Component {
     })
   }
 
+
+  
+
   userLogin = () => {
     this.setState({
       job: 'User Login'
@@ -54,11 +56,9 @@ class App extends Component {
 
   checkSummonsNumberIndex = () => {
     let summonsNumber = document.getElementById('summonsNumber').value
-    console.log(summonsNumber)
-    console.log(this.state.items[0].summons_number)
     let validNumber = false
     for (let i = 0; i < this.state.items.length; i++) {
-      if (this.state.items[i].summons_number === summonsNumber) {
+      if (this.state.items[i].summons_number == summonsNumber) {
         validNumber = true
         break
       }
@@ -75,32 +75,10 @@ class App extends Component {
     }
   }
 
-  login = (e) => {
-    e.preventDefault()
-    alert('button works')
-  }
-
-  passwordReset = (e) => {
-    e.preventDefault()
-    this.setState({
-      job: 'Change Password'
-    })
-  }
-
-  usernameReset = (e) => {
-    e.preventDefault()
-    this.setState({
-      job: 'Change Username'
-    })
-  }
-
-  checkChangeUsername = (e) => {
-    alert('button works')
-  }
-
   // Check input to see if all inputs have been entered
   checkInput = (e) => {
     e.preventDefault()
+
     let username = document.getElementById('usernameField').value;
     let pass = document.getElementById('passwordField').value;
     let platenum = document.getElementById('plateNumberField').value;
@@ -110,27 +88,23 @@ class App extends Component {
     else {
       console.log(platenum)
       console.log(this.state.items[0].plate)
-      let validPlate = false
-      for (let i = 0; i < this.state.items.length; i++) {
-        if (this.state.items[i].plate === platenum) {
-          validPlate = true
-          this.countAccount.push(i)
-        }
-      }
-      if (validPlate) {
-        this.setState({
-          job: 'Account Home'
-        })
-      }
-      else {
-        alert('Invalid plate number, please try again.')
-      }
-    }
-  }
 
-  checkUsername = (e) => {
-    let username = document.getElementById('checkUsername').value
-    alert(`Hello, ${username}. This button works`)
+     const response = fetch('http://localhost:5000/', {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ 
+        username: username,
+        password: pass,
+        plateno: platenum
+      }),
+    }).then((response) => {
+      return response.json();
+    })
+    .then((myJson) => {
+      console.log(myJson);
+    });
+
+    }
   }
 
   navBar = () => {
@@ -190,7 +164,6 @@ class App extends Component {
           <h3>Here at TicketTraqqer, we help users manage their parking and camera violation tickets with ease.<br /><br />
             These violations in New York City are public and we have made it simple for you to search for a specific ticket with just your summons number. You can even create an account to track your tickets and stay up to date on paying your fine.</h3>
           <button onClick={this.userLogin}>Log In</button>
-          <h2>or</h2>
           <button onClick={this.guest}>Continue As Guest</button>
           {footer}
         </div>

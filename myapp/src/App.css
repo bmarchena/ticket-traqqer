@@ -57,6 +57,13 @@ button{
   background-color:#222;
 }
 
+/* Home Page */
+.homePage {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
 /* Login Page */
 .loginPage {
   display: flex;
