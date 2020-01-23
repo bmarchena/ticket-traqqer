@@ -41,6 +41,13 @@ class App extends Component {
     })
   }
 
+  userLogout = () => {
+    this.setState({
+      job: 'Home Page',
+      loggedIn: false,
+    })
+  }
+
   userSignup = () => {
     this.setState({
       job: "User Signup"
@@ -122,7 +129,6 @@ class App extends Component {
           job: 'Account Home'
         })
       }
-      else {
         alert('Invalid plate number, please try again.')
       }
     }
@@ -156,7 +162,7 @@ class App extends Component {
           </ul>
           <ul>
             <li><a className='navlink' onClick={this.homePage}>Account</a></li>
-            <li><a className='navlink' onClick={this.userLogin}>Logout</a></li>
+            <li><a className='navlink' onClick={this.userLogout}>Logout</a></li>
           </ul>
 
         </nav>
@@ -166,9 +172,13 @@ class App extends Component {
 
   footer = () => {
     return (
-      <div className='footer'>
-        <h1>Copyright &copy; 2020, TicketTraqqer, All Rights Reserved</h1>
+      <div>
+        <div className="phantom"/>
+        <div className='footer'>
+          <h1>Copyright &copy; 2020, TicketTraqqer, All Rights Reserved</h1>
+        </div>
       </div>
+      
     )
   }
 
