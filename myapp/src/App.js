@@ -138,11 +138,11 @@ class App extends Component {
       return (
         <nav className="navbar">
           <ul>
-            <li><a className='dunno' onClick={this.goHome}>Ticket Traqqer</a></li>
+            <li><a className='navlink' onClick={this.goHome}>Ticket Traqqer</a></li>
           </ul>
           <ul>
-            <li><a className='dunno' onClick={this.userLogin}>Log In</a></li>
-            <li><a className='dunno' onClick={this.userSignup}>Sign Up</a></li>
+            <li><a className='navlink' onClick={this.userLogin}>Log In</a></li>
+            <li><a className='navlink' onClick={this.userSignup}>Sign Up</a></li>
           </ul>
         </nav>
       )
@@ -152,11 +152,11 @@ class App extends Component {
       return (
         <nav className="navbar">
           <ul>
-            <li><a className='dunno' onClick={this.goHome}>Ticket Traqqer</a></li>
+            <li><a className='navlink' onClick={this.goHome}>Ticket Traqqer</a></li>
           </ul>
           <ul>
-            <li><a className='dunno' onClick={this.homePage}>Account</a></li>
-            <li><a className='dunno' onClick={this.userLogin}>Logout</a></li>
+            <li><a className='navlink' onClick={this.homePage}>Account</a></li>
+            <li><a className='navlink' onClick={this.userLogin}>Logout</a></li>
           </ul>
 
         </nav>

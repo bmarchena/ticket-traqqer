@@ -33,6 +33,7 @@ a:hover{
 
 /* Navbar */
 .navbar {
+  width:100%;
   display: flex;
   background-color: #b9eebc;
   padding: .5rem;
@@ -47,11 +48,11 @@ a:hover{
   max-height: 20px;
 }
 
-.dunno{
+.navlink{
   color: #222;
 }
 
-.dunno:hover{
+.navlink:hover{
   background-color:#222;
 }
 
@@ -109,7 +110,7 @@ a:hover{
 }
 
 .footer{
-  position: fixed;
+  
   left: 0;
   bottom: 0;
   width: 100%;
