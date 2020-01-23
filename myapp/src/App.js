@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Login from './Login.js';
 import SignUp from './signUp';
 import './App.css';
+import logo from './nyc_bg.jpg'
 
 class App extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class App extends Component {
           })
         }
       )
-  }
+  };
 
   goHome = () => {
     this.setState({
@@ -45,7 +46,6 @@ class App extends Component {
       job: "User Signup"
     })
   }
-
   guest = () => {
     this.setState({
       job: 'Guest Page'
@@ -111,15 +111,12 @@ class App extends Component {
       console.log(platenum)
       console.log(this.state.items[0].plate)
       let validPlate = false
-      let j = 0
       for (let i = 0; i < this.state.items.length; i++) {
-        j++
         if (this.state.items[i].plate === platenum) {
           validPlate = true
           this.countAccount.push(i)
         }
       }
-      alert(j)
       if (validPlate) {
         this.setState({
           job: 'Account Home'
@@ -140,24 +137,26 @@ class App extends Component {
     if (this.state.loggedIn === false) {
       return (
         <nav className="navbar">
-          <ul id='leftButton'>
-            <li><a onClick={this.goHome}>Ticket Traqqer</a></li>
+          <ul>
+            <li><a className='dunno' onClick={this.goHome}>Ticket Traqqer</a></li>
           </ul>
-          <ul id='rightButtons'>
-            <li><a onClick={this.userLogin}>Log In</a></li>
-            <li><a onClick={this.userSignup}>Sign Up</a></li>
+          <ul>
+            <li><a className='dunno' onClick={this.userLogin}>Log In</a></li>
+            <li><a className='dunno' onClick={this.userSignup}>Sign Up</a></li>
           </ul>
         </nav>
       )
     }
+
     if (this.state.loggedIn === true) {
       return (
         <nav className="navbar">
-          <h1><a onClick={this.goHome}>Ticket Traqqer</a></h1>
-
           <ul>
-            <li><a onClick={this.homePage}>Account</a></li>
-            <li><a onClick={this.userLogin}>Logout</a></li>
+            <li><a className='dunno' onClick={this.goHome}>Ticket Traqqer</a></li>
+          </ul>
+          <ul>
+            <li><a className='dunno' onClick={this.homePage}>Account</a></li>
+            <li><a className='dunno' onClick={this.userLogin}>Logout</a></li>
           </ul>
 
         </nav>
@@ -177,11 +176,13 @@ class App extends Component {
     let { job, count, navBar, footer } = this.state
     navBar = this.navBar()
     footer = this.footer()
+
     if (job === 'Home Page') {
       return (
         <div className="App" >
           {navBar}
           <h1>Welcome to Ticket Traqqer!</h1>
+          <img src={logo} alt='nyc' width='500' height='333' />
           <h3>Here at Ticket Traqqer, we allow users to manage their parking and camera violation tickets.<br /><br />
             These violations in New York City are public and we have made it simple for you to either search for a specific ticket, or you may make an account to save your tickets and stay up to date on paying your fine.</h3>
           <button onClick={this.userLogin}>Log In</button>
