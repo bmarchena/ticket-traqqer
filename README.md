@@ -11,7 +11,8 @@ TicketTraqqer is a web application aimed at helping users view their driving vio
 
 ## Duties:
 - __Bryan Marchena__:
-- __Emmanuel Vargas__: 
+- __Emmanuel Vargas-Zapata__: 
+    - Creating the App component on App.js
 - __Andrew Ohakam__: 
     - Designing website wireframes (see below)
     - general stylization (for sign-up sheet, navigation bar)

@@ -1,3 +1,4 @@
+/* General settings */
 body{
   background-color: rgb(230, 230, 230);
 }
@@ -16,42 +17,44 @@ body a{
   text-align: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+a:hover{
+  color: #fff;
 }
 
-a:hover{
-  color: #b9eebc;
+button{
+  background-color: #b9eebc;
+  font-size: 1.1rem;
 }
 
 /* Navbar */
 .navbar {
+  width:100%;
   display: flex;
   background-color: #b9eebc;
   padding: .5rem;
   justify-content: space-between;
-  font-family: 'Courier New', Courier, monospace;
 }
 
 .navbar li{
   padding: 1rem;
-  margin:auto;
   display: inline;
+  max-height: 20px;
+  margin: 0 0.25rem;
 }
 
 .navlink{
   color: #222;
+  padding: 1.05rem;
+}
+
+.leftlink{
+  font-size: 1.2rem;
+  font-weight: bold;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .navlink:hover{
-  color:#222;
+  background-color:#222;
 }
 
 /* Login Page */
@@ -79,6 +82,7 @@ a:hover{
   max-width: 100px;
   align-self: center;
   background-color: #b9eebc;
+  font-size: 1.05rem;
 }
 
 .loginForm p {
@@ -106,7 +110,9 @@ a:hover{
   flex-wrap: wrap;
   justify-content: center;
 }
+
 /* Footer */
+
 .phantom{
   display: block;
   padding: 60px;
@@ -115,14 +121,17 @@ a:hover{
 }
 
 .footer{
-  position: fixed;
+  
   left: 0;
   bottom: 0;
   width: 100%;
   background-color: #222;
   color: #b9eebc;
   padding: 0.5rem 0;
-  /* margin: auto; */
   font-size: .5em;
   text-align: center;
+}
+
+img{
+    border-radius:50%;
 }

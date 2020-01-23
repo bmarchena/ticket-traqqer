@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Login from './Login.js';
 import SignUp from './signUp';
 import './App.css';
+import logo from './nyc_bg.jpg'
 
 class App extends Component {
   constructor(props) {
@@ -136,22 +137,28 @@ class App extends Component {
     if (this.state.loggedIn === false) {
       return (
         <nav className="navbar">
-          <h1><a className="navlink" onClick={this.goHome}>TicketTraqqer</a></h1>
           <ul>
-            <li><a className="navlink" onClick={this.userLogin}>Log In</a></li>
-            <li><a className="navlink" onClick={this.userSignup}>Sign Up</a></li>
+            <li><a className='navlink leftlink' onClick={this.goHome}>TicketTraqqer</a></li>
+          </ul>
+          <ul>
+            <li><a className='navlink' onClick={this.userLogin}>Log In</a></li>
+            <li><a className='navlink' onClick={this.userSignup}>Sign Up</a></li>
           </ul>
         </nav>
       )
     }
+
     if (this.state.loggedIn === true) {
       return (
         <nav className="navbar">
-          <h1><a onClick={this.goHome}>TicketTraqqer</a></h1>
-            <ul>
-              <li><a className="navlink" onClick={this.homePage}>Account</a></li>
-              <li><a className="navlink" onClick={this.userLogin}>Logout</a></li>
-            </ul>
+          <ul>
+            <li><a className='navlink leftlink' onClick={this.goHome}>TicketTraqqer</a></li>
+          </ul>
+          <ul>
+            <li><a className='navlink' onClick={this.homePage}>Account</a></li>
+            <li><a className='navlink' onClick={this.userLogin}>Logout</a></li>
+          </ul>
+
         </nav>
       )
     }
@@ -173,13 +180,15 @@ class App extends Component {
     let { job, count, navBar, footer } = this.state
     navBar = this.navBar()
     footer = this.footer()
+
     if (job === 'Home Page') {
       return (
         <div className="App" >
           {navBar}
-          <h1>Welcome to Ticket Traqqer!</h1>
-          <h3>Here at Ticket Traqqer, we allow users to manage their parking and camera violation tickets.<br /><br />
-            These violations in New York City are public and we have made it simple for you to either search for a specific ticket, or you may make an account to save your tickets and stay up to date on paying your fine.</h3>
+          <h1>Welcome to TicketTraqqer!</h1>
+          <img src={logo} alt='nyc' width='500' height='333' />
+          <h3>Here at TicketTraqqer, we help users manage their parking and camera violation tickets with ease.<br /><br />
+            These violations in New York City are public and we have made it simple for you to search for a specific ticket with just your summons number. You can even create an account to track your tickets and stay up to date on paying your fine.</h3>
           <button onClick={this.userLogin}>Log In</button>
           <h2>or</h2>
           <button onClick={this.guest}>Continue As Guest</button>
