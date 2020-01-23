@@ -35,7 +35,7 @@ a:hover{
 .navbar {
   display: flex;
   background-color: #b9eebc;
-  padding: 1rem;
+  padding: .5rem;
   justify-content: space-between;
   font-family: 'Courier New', Courier, monospace;
 }

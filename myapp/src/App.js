@@ -86,6 +86,17 @@ class App extends Component {
     })
   }
 
+  usernameReset = (e) => {
+    e.preventDefault()
+    this.setState({
+      job: 'Change Username'
+    })
+  }
+
+  checkChangeUsername = (e) => {
+    alert('button works')
+  }
+
   // Check input to see if all inputs have been entered
   checkInput = (e) => {
     e.preventDefault()
@@ -117,7 +128,8 @@ class App extends Component {
   }
 
   checkUsername = (e) => {
-
+    let username = document.getElementById('checkUsername').value
+    alert(`Hello, ${username}. This button works`)
   }
 
   navBar = () => {
@@ -206,7 +218,7 @@ class App extends Component {
       return (
         <div className="userLogin">
           {navBar}
-          <Login login={this.login} passwordReset={this.passwordReset} />
+          <Login login={this.login} passwordReset={this.passwordReset} usernameReset={this.usernameReset} />
           {footer}
         </div>
       )
@@ -241,7 +253,23 @@ class App extends Component {
           <label>Enter your username:</label>
           <input type='type' id='checkUsername'></input>
           <button onClick={this.checkUsername}>Submit</button>
-          <p>Forgot your username? Reset it <a onClick={this.usernameReset}>here!</a> </p>
+          {footer}
+        </div>
+      )
+    }
+
+    else if (job === "Change Username") {
+      return (
+        <div className="App" >
+          {navBar}
+          <h1>Change Username</h1>
+          <label>Enter your plate number:</label>
+          <input type='type' id='checkPlates'></input>
+          <br />
+          <label>Enter your password:</label>
+          <input type='type' id='checkPass'></input>
+          <br />
+          <button onClick={this.checkChangeUsername}>Submit</button>
           {footer}
         </div>
       )
