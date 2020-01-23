@@ -56,6 +56,13 @@ a:hover{
   background-color:#222;
 }
 
+/* Home Page */
+.homePage {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
 /* Login Page */
 .loginPage {
   display: flex;
@@ -117,7 +124,7 @@ a:hover{
 }
 
 .footer{
-  
+  position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;

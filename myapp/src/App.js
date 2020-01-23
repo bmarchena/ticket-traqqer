@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import Login from './Login.js';
-import SignUp from './signUp';
+import SignUp from './SignUp.js';
 import './App.css';
-import logo from './nyc_bg.jpg'
-
+import logo from './nyc_bg.jpg' 
 class App extends Component {
   constructor(props) {
     super(props)
@@ -11,10 +10,12 @@ class App extends Component {
       //what needs to be done
       job: 'Home Page',
       loggedIn: false,
-      count: null,
+      count: 0,
       items: [],
+      currentUser: '',
+      currentPlate: '',
+      fineAmount: 0,
     }
-    this.countAccount = []
   }
 
   componentDidMount() {
@@ -35,6 +36,9 @@ class App extends Component {
     })
   }
 
+
+
+
   userLogin = () => {
     this.setState({
       job: 'User Login'
@@ -53,6 +57,7 @@ class App extends Component {
       job: "User Signup"
     })
   }
+
   guest = () => {
     this.setState({
       job: 'Guest Page'
@@ -61,11 +66,9 @@ class App extends Component {
 
   checkSummonsNumberIndex = () => {
     let summonsNumber = document.getElementById('summonsNumber').value
-    console.log(summonsNumber)
-    console.log(this.state.items[0].summons_number)
     let validNumber = false
     for (let i = 0; i < this.state.items.length; i++) {
-      if (this.state.items[i].summons_number === summonsNumber) {
+      if (this.state.items[i].summons_number == summonsNumber) {
         validNumber = true
         break
       }
@@ -82,61 +85,61 @@ class App extends Component {
     }
   }
 
-  login = (e) => {
-    e.preventDefault()
-    alert('button works')
-  }
-
-  passwordReset = (e) => {
-    e.preventDefault()
-    this.setState({
-      job: 'Change Password'
-    })
-  }
-
-  usernameReset = (e) => {
-    e.preventDefault()
-    this.setState({
-      job: 'Change Username'
-    })
-  }
-
-  checkChangeUsername = (e) => {
-    alert('button works')
-  }
-
   // Check input to see if all inputs have been entered
   checkInput = (e) => {
     e.preventDefault()
+
     let username = document.getElementById('usernameField').value;
     let pass = document.getElementById('passwordField').value;
     let platenum = document.getElementById('plateNumberField').value;
+    let ticketCount = 0
+    let ticketFine = 0
     if (username === '' || pass === '' || platenum === '') {
       alert("All fields must be filled")
     }
     else {
       console.log(platenum)
       console.log(this.state.items[0].plate)
+
       let validPlate = false
       for (let i = 0; i < this.state.items.length; i++) {
         if (this.state.items[i].plate === platenum) {
           validPlate = true
-          this.countAccount.push(i)
+          ticketCount ++
+          ticketFine = ticketFine + Number(this.state.items[i].fine_amount)
+          console.log(ticketFine)
         }
       }
       if (validPlate) {
+        const response = fetch('http://localhost:5000/', {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            username: username,
+            password: pass,
+            plateno: platenum,
+            fineAmount: ticketFine
+          }),
+        })
+          .then((response) => {
+            return response.json();
+          })
+          .then((myJson) => {
+            console.log(myJson);
+          });
         this.setState({
-          job: 'Account Home'
+          job: 'Account Home',
+          count: ticketCount,
+          currentUser: username,
+          currentPlate: platenum
         })
       }
+      else {
         alert('Invalid plate number, please try again.')
       }
     }
-  }
-
-  checkUsername = (e) => {
-    let username = document.getElementById('checkUsername').value
-    alert(`Hello, ${username}. This button works`)
   }
 
   navBar = () => {
@@ -164,7 +167,6 @@ class App extends Component {
             <li><a className='navlink' onClick={this.homePage}>Account</a></li>
             <li><a className='navlink' onClick={this.userLogout}>Logout</a></li>
           </ul>
-
         </nav>
       )
     }
@@ -173,17 +175,17 @@ class App extends Component {
   footer = () => {
     return (
       <div>
-        <div className="phantom"/>
+        <div className="phantom" />
         <div className='footer'>
           <h1>Copyright &copy; 2020, TicketTraqqer, All Rights Reserved</h1>
         </div>
       </div>
-      
+
     )
   }
 
   render() {
-    let { job, count, navBar, footer } = this.state
+    let { job, count, currentUser, currentPlate, navBar, footer, fineAmount } = this.state
     navBar = this.navBar()
     footer = this.footer()
 
@@ -196,7 +198,6 @@ class App extends Component {
           <h3>Here at Ticket Traqqer, we allow users to manage their parking and camera violation tickets.<br /><br />
             These violations in New York City are public and we have made it simple for you to either search for a specific ticket, or you may make an account to save your tickets and stay up to date on paying your fine.</h3>
           <button onClick={this.userLogin}>Log In</button>
-          <h2>or</h2>
           <button onClick={this.guest}>Continue As Guest</button>
           {footer}
         </div>
@@ -253,8 +254,10 @@ class App extends Component {
       return (
         <div className="App" >
           {navBar}
-          <h1>Welcome USERNAME</h1>
-          <h2>You have {this.countAccount.length} parking violations.</h2>
+          <h1>Welcome {currentUser}</h1>
+          <h2>Based on license plate {currentPlate}, you have {count} parking violation/s.</h2>
+          <h2>In total, you were fined ${fineAmount}.</h2>
+          <h1>Pay your fine <a href="https://secure24.ipayment.com/NYCPayments/nycbookmark.htm" target="_blank">here.</a></h1>
           {footer}
         </div>
       )
@@ -291,5 +294,10 @@ class App extends Component {
     }
   }
 }
-
 export default App;
+
+
+//what is the app about?
+//roles of each member
+//share website wireframe img
+//share any interesting code
