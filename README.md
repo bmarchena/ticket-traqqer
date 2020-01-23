@@ -19,4 +19,4 @@ TicketTraqqer is a web application aimed at helping users view their driving vio
     - Developing Sign-Up sheet
 
 ## Wireframes (Website draft)
-![All pages](img/TicketTraqqerWireFrames.png)
+![All pages](myapp/src/img/TicketTraqqerWireFrames.png)

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Login from './Login.js';
-import SignUp from './SignUp.js';
+import SignUp from './signUp.js';
 import './App.css';
-import logo from './nyc_bg.jpg'
+import logo from './img/nyc_bg.jpg'
 
 class App extends Component {
   constructor(props) {
@@ -167,7 +167,6 @@ class App extends Component {
           <button onClick={this.guest}>Continue As Guest</button>
           {footer}
         </div>
-
       );
     }
 
