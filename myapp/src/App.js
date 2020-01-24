@@ -38,7 +38,11 @@ class App extends Component {
     })
   }
 
-
+  goProfile = () => {
+    this.setState({
+      job: 'User Profile'
+    })
+  }
   
 
   userLogin = (e) => {
@@ -60,20 +64,17 @@ class App extends Component {
         password: pass
       }),
     }).then((response) => {
-      console.log('Response', response)
       return response.json();
     })
     .then((myJson) => {
       let userInfo = JSON.parse(myJson.response)
-      console.log("Fetch Login", userInfo);
+
+
       this.username = userInfo.username
       this.plateno = userInfo.plateno
 
-      console.log('Username after: ', this.username)
-      console.log('Plateno after: ', this.plateno)
     });
 
-    console.log('changin state')
     this.setState({
       job: "User Profile",
       loggedIn: true
@@ -86,6 +87,16 @@ class App extends Component {
       job: "User Signup"
     })
   }
+
+  userLogout = () => {
+    this.username = ''
+    this.plateno = ''
+    this.setState({
+      job: "Home Page",
+      loggedIn: false
+    })
+  }
+
   guest = () => {
     this.setState({
       job: 'Guest Page'
@@ -124,8 +135,6 @@ class App extends Component {
       alert("All fields must be filled")
     }
     else {
-      console.log(platenum)
-      console.log(this.state.items[0].plate)
 
      const response = fetch('http://localhost:5000/addUser', {
       method: 'POST',
@@ -174,8 +183,8 @@ class App extends Component {
             <li><a className='navlink' onClick={this.goHome}>Ticket Traqqer</a></li>
           </ul>
           <ul>
-            <li><a className='navlink' onClick={this.homePage}>Account</a></li>
-            <li><a className='navlink' onClick={this.userLogin}>Logout</a></li>
+            <li><a className='navlink' onClick={this.goProfile}>Account</a></li>
+            <li><a className='navlink' onClick={this.userLogout}>Logout</a></li>
           </ul>
 
         </nav>

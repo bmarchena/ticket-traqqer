@@ -115,16 +115,23 @@ a:hover{
   flex-wrap: wrap;
   justify-content: center;
 }
+/* Footer */
+.phantom{
+  display: block;
+  padding: 60px;
+  height: '60px';
+  width: '100%';
+}
 
 .footer{
-  
+  position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
   background-color: #222;
   color: #b9eebc;
-  padding: 1.1rem 0;
-  margin: auto;
+  padding: 0.5rem 0;
+  /* margin: auto; */
   font-size: .5em;
   text-align: center;
 }
