@@ -17,6 +17,8 @@ class SignUp extends Component {
                     <input id="usernameField" type="text" placeholder="Username" />
                     <label>Enter Password: </label>
                     <input id="passwordField" type="password" placeholder="Password" />
+                    <label>Re-enter Password: </label>
+                    <input id="passwordField2" type="password" placeholder="Password" />
                     <label>Enter Plate Number: </label>
                     <input id="plateNumberField" type="text" placeholder="Plate Number" />
                     <button onClick={this.props.checkInput}>Sign Up!</button>

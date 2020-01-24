@@ -11,6 +11,19 @@ expApp.use(cors())
 
 const mysql = require('mysql')
 
+let apiData = []
+
+async function getApi() {
+    fetch('https://data.cityofnewyork.us/resource/nc67-uf89.json')
+    .then(res => res.json())
+    .then(
+        (res) => {
+        apiData.push(res)}
+    )
+} 
+ 
+getApi()
+
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -22,13 +35,23 @@ connection.connect()
 
 
 expApp.post('/addUser', function (req, res) {
-    let sql = `INSERT INTO users(username, password, plateno) VALUES('${req.body.username}', '${req.body.password}', '${req.body.plateno}')`
+    let userData = apiData.filter((vio) => { vio.plate === req.body.plateno
+    })
+    
+    console.log('API DATA', apiData)
+    console.log('USER DATA', userData)
 
-    connection.query(sql)
+    let sql1 = `SELECT * FROM users HAVING username = '${req.body.username}' OR plateno = '${req.body.plateno}'`
+
+    let sql2 = `INSERT INTO users(username, password, plateno) VALUES('${req.body.username}', '${req.body.password}', '${req.body.plateno}')`
+
+    connection.query(sql2)
     console.log(req.body)
   })
 
  expApp.post('/login', async function(req, res) {
+    console.log(apiData)
+
     let sql = `SELECT * FROM users HAVING username = '${req.body.username}' AND password = '${req.body.password}'` ;
 
     let response

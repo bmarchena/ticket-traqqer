@@ -136,15 +136,29 @@ class App extends Component {
 
     let username = document.getElementById('usernameField').value;
     let pass = document.getElementById('passwordField').value;
+    let pass2 = document.getElementById('passwordField2').value;
     let platenum = document.getElementById('plateNumberField').value;
+
+    this.username = username
+    this.plateno = platenum
+
     let ticketCount = 0
     let ticketFine = 0
     if (username === '' || pass === '' || platenum === '') {
       alert("All fields must be filled")
+      document.getElementById('passwordField').value = ''
+      document.getElementById('passwordField2').value = ''
+    }
+    else if(pass != pass2){
+      alert('Passwords do not match. Please try again')
+      document.getElementById('passwordField').value = ''
+      document.getElementById('passwordField2').value = ''
     }
     else {
-      console.log(platenum)
       console.log(this.state.items[0].plate)
+      console.log(this.state.items[1].plate)
+      console.log(this.state.items[2].plate)
+      console.log(this.state.items[3].plate)
 
       let validPlate = false
       for (let i = 0; i < this.state.items.length; i++) {
@@ -174,11 +188,10 @@ class App extends Component {
           .then((myJson) => {
             console.log(myJson);
           });
-        this.setState({
-          job: 'Account Home',
-          count: ticketCount,
-          currentUser: username,
-          currentPlate: platenum
+          
+          window.alert("Sign-up successful! Please log in.")
+          this.setState({
+          job: 'User Profile'
         })
       }
       else {
@@ -186,13 +199,20 @@ class App extends Component {
       }
     }
 
-    window.alert("Sign-up successful! Please log in.")
-
-    this.setState({
-      job: 'User Login'
-    })
-
   }
+
+  homeButtons = () => {
+    if (this.state.loggedIn === false) {
+      return (
+        <div>
+          <button onClick={this.userLogin}>Log In</button>
+          <button onClick={this.guest}>Continue As Guest</button>
+        </div>
+      )
+    }
+  }
+
+
 
   navBar = () => {
     if (this.state.loggedIn === false) {
@@ -238,9 +258,10 @@ class App extends Component {
   }
 
   render() {
-    let { job, count, currentUser, currentPlate, navBar, footer, fineAmount } = this.state
+    let { job, count, currentUser, currentPlate, navBar, footer, homeButtons, fineAmount } = this.state
     navBar = this.navBar()
     footer = this.footer()
+    homeButtons = this.homeButtons()
 
     if (job === 'Home Page') {
       return (
@@ -250,8 +271,7 @@ class App extends Component {
           <img src={logo} alt='nyc' width='500' height='333' />
           <h3>Here at TicketTraqqer, we help users manage their parking and camera violation tickets with ease.<br /><br />
             These violations in New York City are public and we have made it simple for you to search for a specific ticket with just your summons number. You can even create an account to track your tickets and stay up to date on paying your fine.</h3>
-          <button onClick={this.userLogin}>Log In</button>
-          <button onClick={this.guest}>Continue As Guest</button>
+            {homeButtons}
           {footer}
         </div>
       );
@@ -350,7 +370,9 @@ class App extends Component {
         <div className="App">
           {navBar}
           <UserProfile user={this.username} plate={this.plateno}/>
+          {footer}
         </div>
+
       )
     }
 
