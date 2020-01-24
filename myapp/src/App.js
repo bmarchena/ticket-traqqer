@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Login from './Login.js';
 import SignUp from './SignUp.js';
 import './App.css';
-import logo from './nyc_bg.jpg' 
+import logo from './img/nyc_bg.jpg'
+
 class App extends Component {
   constructor(props) {
     super(props)
@@ -31,6 +32,7 @@ class App extends Component {
   };
 
   goHome = () => {
+    
     this.setState({
       job: 'Home Page'
     })
@@ -66,15 +68,17 @@ class App extends Component {
 
   checkSummonsNumberIndex = () => {
     let summonsNumber = document.getElementById('summonsNumber').value
+    console.log(summonsNumber)
     let validNumber = false
+    let index = 0
     for (let i = 0; i < this.state.items.length; i++) {
       if (this.state.items[i].summons_number == summonsNumber) {
         validNumber = true
+        index = i
         break
       }
     }
     if (validNumber) {
-      let index = this.state.items.findIndex(item => item.summons_number === summonsNumber)
       this.setState({
         count: index,
         job: 'Guest Page Search'
@@ -147,7 +151,7 @@ class App extends Component {
       return (
         <nav className="navbar">
           <ul>
-            <li><a className='navlink' onClick={this.goHome}>Ticket Traqqer</a></li>
+            <li><a className='navlink leftlink' onClick={this.goHome}>TicketTraqqer</a></li>
           </ul>
           <ul>
             <li><a className='navlink' onClick={this.userLogin}>Log In</a></li>
@@ -161,7 +165,7 @@ class App extends Component {
       return (
         <nav className="navbar">
           <ul>
-            <li><a className='navlink' onClick={this.goHome}>Ticket Traqqer</a></li>
+            <li><a className='navlink leftlink' onClick={this.goHome}>TicketTraqqer</a></li>
           </ul>
           <ul>
             <li><a className='navlink' onClick={this.homePage}>Account</a></li>
@@ -175,12 +179,13 @@ class App extends Component {
   footer = () => {
     return (
       <div>
-        <div className="phantom" />
+        {/* Phantom allows some space between page content and the footer */}
+        <div className="phantom"/>
         <div className='footer'>
           <h1>Copyright &copy; 2020, TicketTraqqer, All Rights Reserved</h1>
+          <h1>Project Created By Bryan Marchena, Emmanuel Vargas-Zapata, and Andrew Ohakam</h1>
         </div>
       </div>
-
     )
   }
 
@@ -193,15 +198,14 @@ class App extends Component {
       return (
         <div className="App" >
           {navBar}
-          <h1>Welcome to Ticket Traqqer!</h1>
+          <h1>Welcome to TicketTraqqer!</h1>
           <img src={logo} alt='nyc' width='500' height='333' />
-          <h3>Here at Ticket Traqqer, we allow users to manage their parking and camera violation tickets.<br /><br />
-            These violations in New York City are public and we have made it simple for you to either search for a specific ticket, or you may make an account to save your tickets and stay up to date on paying your fine.</h3>
+          <h3>Here at TicketTraqqer, we help users manage their parking and camera violation tickets with ease.<br /><br />
+            These violations in New York City are public and we have made it simple for you to search for a specific ticket with just your summons number. You can even create an account to track your tickets and stay up to date on paying your fine.</h3>
           <button onClick={this.userLogin}>Log In</button>
           <button onClick={this.guest}>Continue As Guest</button>
           {footer}
         </div>
-
       );
     }
 
