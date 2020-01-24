@@ -107,6 +107,21 @@ class App extends Component {
     })
   }
 
+  checkResetUsername = () => {
+    alert('button works')
+  }
+
+  usernameReset = () => {
+    this.setState({
+      job: 'Reset Username'
+    })
+  }
+  passwordReset = () => {
+    this.setState({
+      job: 'Reset Password'
+    })
+  }
+
   checkSummonsNumberIndex = () => {
     let summonsNumber = document.getElementById('summonsNumber').value
     console.log(summonsNumber)
@@ -188,10 +203,9 @@ class App extends Component {
           .then((myJson) => {
             console.log(myJson);
           });
-          
-          window.alert("Sign-up successful! Please log in.")
           this.setState({
-          job: 'User Profile'
+          job: 'User Profile',
+          loggedIn: true
         })
       }
       else {
@@ -268,7 +282,6 @@ class App extends Component {
         <div className="App" >
           {navBar}
           <h1>Welcome to TicketTraqqer!</h1>
-          <img src={logo} alt='nyc' width='500' height='333' />
           <h3>Here at TicketTraqqer, we help users manage their parking and camera violation tickets with ease.<br /><br />
             These violations in New York City are public and we have made it simple for you to search for a specific ticket with just your summons number. You can even create an account to track your tickets and stay up to date on paying your fine.</h3>
             {homeButtons}
@@ -373,6 +386,24 @@ class App extends Component {
           {footer}
         </div>
 
+      )
+    }
+
+    else if (job === 'Reset Password') {
+      return (
+        <div className='App'>
+          {navBar}
+          <label>Insert Username:</label>
+          <br />
+          <input type='text'></input>
+          <br />
+          <label>Insert License Plate:</label>
+          <br />
+          <input type='text'></input>
+          <br />
+          <button onClick={this.checkResetUsername}>Submit</button>
+          {footer}
+        </div>
       )
     }
 

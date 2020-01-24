@@ -37,16 +37,22 @@ connection.connect()
 expApp.post('/addUser', function (req, res) {
     let userData = apiData.filter((vio) => { vio.plate === req.body.plateno
     })
-    
-    console.log('API DATA', apiData)
-    console.log('USER DATA', userData)
 
     let sql1 = `SELECT * FROM users HAVING username = '${req.body.username}' OR plateno = '${req.body.plateno}'`
+
+    connection.query(sql1, async function(err, res) {
+        if (err)
+            throw err;
+        
+        console.log('Query 1:', Object.keys(res))
+    })
 
     let sql2 = `INSERT INTO users(username, password, plateno) VALUES('${req.body.username}', '${req.body.password}', '${req.body.plateno}')`
 
     connection.query(sql2)
     console.log(req.body)
+
+    res.send(`Added User ${req.body.username}`)
   })
 
  expApp.post('/login', async function(req, res) {
@@ -69,20 +75,7 @@ expApp.post('/addUser', function (req, res) {
         });
      })
 
-    console.log('BEFORE SENDING:', response)
-
 })
 
-
-  
-expApp.get('/', function(req, res){
-    console.log('i am the get')
-    res.json(null)
-})
-
-expApp.post('/add', function(req, res){
-    console.log('here I am the post')
-    res.json(null)
-})
 
 expApp.listen(5000)
